@@ -1,0 +1,22 @@
+{
+  "name": "tongzhou",
+  "version": "1.0.0",
+  "description": "A project for TONGZHOU",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guojian0610/tongzhou.git"
+  },
+  "author": "Jian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guojian0610/tongzhou/issues"
+  },
+  "homepage": "https://github.com/guojian0610/tongzhou#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
