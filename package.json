@@ -4,7 +4,9 @@
   "description": "A project for TONGZHOU",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "set NODE_ENV=production && webpack",
+    "build:dev": "set NODE_ENV=development && webpack"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,6 @@
 let path = require('path');
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProduction = nodeEnv === 'production';
 module.exports = {
     entry: {
         app: './app/index.js'
@@ -14,7 +16,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015','react', 'latest']
+                    presets: ['es2015','react']
                 }
             }
         ]
