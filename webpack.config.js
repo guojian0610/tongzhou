@@ -10,13 +10,15 @@ module.exports = {
         filename: '[name].bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.js$/, // babel 转换为兼容性的 js
+                test: /\.jsx?$/, // babel 转换为兼容性的 js
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015','react']
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
                 }
             }
         ]
