@@ -11,6 +11,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
 import ManifestPlugin from'webpack-manifest-plugin'
 import WebpackChunkHash from 'webpack-chunk-hash';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 
 const {UglifyJsPlugin, CommonsChunkPlugin} = webpack.optimize
 
@@ -76,6 +77,14 @@ const config = {
       manifestVariable: 'webpackManifest',
       inlineManifest: false
     }),//它会将 manifest 提取到一个单独的 JSON 文件中
+    new CleanWebpackPlugin(
+      ['public/js','public/manifest.js','public/chunk-manifest.json'],　 //匹配删除的文件
+        {
+          root: __dirname,       　　　　　　　　　　//根目录
+          verbose:  true,        　　　　　　　　　　//开启在控制台输出信息
+          dry:      false        　　　　　　　　　　//启用删除文件
+        }
+    )
   ],
   externals: {
     zepto: 'jQuery'
