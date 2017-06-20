@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "set NODE_ENV=production && webpack --config webpack.config.babel.js --progress",
-    "build:dev": "set NODE_ENV=development && webpack"
+    "build:dev": "set NODE_ENV=development && webpack",
+    "start": " set NODE_ENV=production && node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/guojian0610/tongzhou#readme",
   "dependencies": {
+    "ejs": "^2.5.6",
     "express": "^4.15.3",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",

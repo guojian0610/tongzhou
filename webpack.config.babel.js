@@ -16,7 +16,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 const {UglifyJsPlugin, CommonsChunkPlugin} = webpack.optimize
 
 const ENV = process.env.NODE_ENV || 'development'
-
+console.log(`xxxxxxxxxx:${ENV}`);
 const entry = {
     vendor: ['react','react-dom','react-router','redux','react-redux'],
     app: './index.jsx'
@@ -66,7 +66,7 @@ const config = {
     new DefinePlugin({ENV: JSON.stringify(ENV)}),
     new CommonsChunkPlugin({
         names: ['vendor','manifest'], 
-        filename: 'js/vendor.[chunkhash].js',
+        filename: 'js/[name].[chunkhash].js',
         minChunks: Infinity//库文件不会被我们自己写的模块引用，所以永远不会被打包进来
     }),
     new ManifestPlugin(),
@@ -103,6 +103,7 @@ if (ENV === 'development') {
   /************************************************************************
   *                               PRODUCTION
   *************************************************************************/
+  console.log('xxxxxxxxxxxxxxxxxxxx')
   config.plugins.push(new UglifyJsPlugin({
     sourceMap: true,
     compress: {
