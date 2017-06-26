@@ -1,10 +1,17 @@
 let express = require('express');
 let app = express();
 let mainRouter = require('../routers/mainRouter')
+let path = require('path');
 
-app.use('/static', express.static('public'),{
-    dotfiles: 'deny'
-});
+
+app.set('view engine', 'ejs');
+
+// app.use(express.static('public'),{
+//     dotfiles: 'deny'
+// });
+
+app.use('/static',express.static(path.resolve(__dirname,'../public')));
+
 app.use('/',(req,res,next)=>{
     console.log(`originalUrl = ${req.originalUrl}`);
     next();

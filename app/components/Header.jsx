@@ -1,5 +1,4 @@
-import {React, ReactDOM} from 'react'
-
+import {React} from 'react'
 export default class Header extends React.Component {
   render() {
     return <div>Hello {this.props.name}</div>;
