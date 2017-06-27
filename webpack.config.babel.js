@@ -16,7 +16,6 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 const {UglifyJsPlugin, CommonsChunkPlugin} = webpack.optimize
 
 const ENV = process.env.NODE_ENV || 'development'
-console.log(`xxxxxxxxxx:${ENV}`);
 const entry = {
     vendor: ['react','react-dom','react-router','redux','react-redux'],
     app: './index.jsx'
@@ -45,6 +44,9 @@ const rules = [
       loader: 'exports-loader?window.Zepto!script-loader'
   }
 ]
+
+console.log(JSON.stringify(ENV));
+
 const config = {
   context: path.join(__dirname, 'app'),
   entry,
@@ -63,7 +65,12 @@ const config = {
     modules: [path.resolve(__dirname, 'node_modules')]
   },
   plugins: [
-    new DefinePlugin({ENV: JSON.stringify(ENV)}),
+    new DefinePlugin({
+                'process.env': {
+                    //NODE_ENV: '"production"'
+                    NODE_ENV: JSON.stringify(ENV)
+                }
+            }),
     new CommonsChunkPlugin({
         names: ['vendor','manifest'], 
         filename: 'js/[name].[chunkhash].js',
@@ -87,7 +94,7 @@ const config = {
     )
   ],
   externals: {
-    zepto: 'jQuery'
+    zepto: 'Zepto'
   },
   devtool: 'source-map'
 }

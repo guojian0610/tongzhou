@@ -1,7 +1,9 @@
-import {React, ReactDOM} from 'react'
+import React from 'react'
+import { render } from 'react-dom';
+
 import Header from './components/Header.jsx'
 
-ReactDOM.render(
+render(
   <Header name="John" />,
   document.getElementById('container')
 );
