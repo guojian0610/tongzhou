@@ -1,0 +1,5 @@
+{
+  "app.js": "js/debug/app-debug.js",
+  "manifest.js": "js/manifest.d41d8cd98f00b204e980.js",
+  "vendor.js": "js/vendor.467f77ed0e55504a0e23.js"
+}

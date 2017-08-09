@@ -9,7 +9,7 @@ import path from 'path'
 
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
-import ManifestPlugin from'webpack-manifest-plugin'
+import ManifestPlugin from 'webpack-manifest-plugin'
 import WebpackChunkHash from 'webpack-chunk-hash';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 
@@ -22,8 +22,8 @@ const entry = {
 }
 const output = {
   path: path.join(__dirname, 'public'),
-  pathinfo: true,//告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项默认值是 false，并且不应该用于生产环境(production)，但是对阅读开发环境(development)中的生成代码(generated code)极其有用。
-  filename: 'js/[name].[chunkhash].js',//取8位的hash，默认是16位
+  pathinfo: ENV === 'development' ? true : false,//告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项默认值是 false，并且不应该用于生产环境(production)，但是对阅读开发环境(development)中的生成代码(generated code)极其有用。
+  filename: ENV === 'development' ? "js/debug/[name]-debug.js" : 'js/[name].[chunkhash].js',//取8位的hash，默认是16位
 }
 const rules = [
   {
@@ -76,21 +76,23 @@ const config = {
         filename: 'js/[name].[chunkhash].js',
         minChunks: Infinity//库文件不会被我们自己写的模块引用，所以永远不会被打包进来
     }),
-    new ManifestPlugin(),
+    new ManifestPlugin({
+      fileName: ENV === 'development' ? 'webpack-manifes-debug.json' : 'webpack-manifest.json'
+    }),
     new webpack.HashedModuleIdsPlugin(),
     new WebpackChunkHash(),
     new ChunkManifestPlugin({
-      filename: 'chunk-manifest.json',
+      filename: ENV === 'development' ? 'chunk-manifest-debug.json' : 'chunk-manifest.json',
       manifestVariable: 'webpackManifest',
       inlineManifest: false
     }),//它会将 manifest 提取到一个单独的 JSON 文件中
     new CleanWebpackPlugin(
-      ['public/js','public/manifest.js','public/chunk-manifest.json'],　 //匹配删除的文件
-        {
-          root: __dirname,       　　　　　　　　　　//根目录
-          verbose:  true,        　　　　　　　　　　//开启在控制台输出信息
-          dry:      false        　　　　　　　　　　//启用删除文件
-        }
+      ENV === 'development' ? ['public/js/debug','public/webpack-manifest-debug.js','public/chunk-manifest-debug.json']:['public/js','public/webpack-manifest.js','public/chunk-manifest.json'],　 //匹配删除的文件
+      {
+        root: __dirname,       　　　　　　　　　　//根目录
+        verbose:  true,        　　　　　　　　　　//开启在控制台输出信息
+        dry:      false        　　　　　　　　　　//启用删除文件
+      }
     )
   ],
   externals: {
@@ -103,9 +105,10 @@ if (ENV === 'development') {
   /************************************************************************
   *                               DEVELOPMENT
   *************************************************************************/
-  config.plugins.push(new NoErrorsPlugin())//跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
-  // config.devtool = 'inline-source-map'
-  config.devtool = 'eval-source-map'
+  //config.plugins.push(new NoErrorsPlugin())//跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
+  config.devtool = 'inline-source-map'
+  //config.devtool = 'eval-source-map'
+
 } else {
   /************************************************************************
   *                               PRODUCTION
@@ -125,6 +128,11 @@ if (ENV === 'development') {
     }
   }))
 
+  config.plugins.push(new ExtractTextPlugin({
+      filename: 'public/css/[name].[chunkhash].css',
+      allChunks: true
+  }))
+
   config.module.rules.push({
     test: /\.(scss|sass|css)$/,
     use: ExtractTextPlugin.extract({
@@ -132,11 +140,6 @@ if (ENV === 'development') {
         use: 'css-loader'
     })
   })
-
-  config.plugins.push(new ExtractTextPlugin({
-      filename: 'public/css/[name].[chunkhash].css',
-      allChunks: true
-  }))
 }
 
 export default config
