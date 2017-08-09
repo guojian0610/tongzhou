@@ -110,7 +110,6 @@ if (ENV === 'development') {
   /************************************************************************
   *                               PRODUCTION
   *************************************************************************/
-  console.log('xxxxxxxxxxxxxxxxxxxx')
   config.plugins.push(new UglifyJsPlugin({
     sourceMap: true,
     compress: {

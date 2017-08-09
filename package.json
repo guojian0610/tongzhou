@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "set NODE_ENV=production&& webpack --config webpack.config.babel.js --progress",
-    "build:dev": "set NODE_ENV=development&& webpack --config webpack.config.babel.js",
-    "start": " set NODE_ENV=production&& node index.js"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.babel.js --progress",
+    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.babel.js  --progress",
+    "start": "cross-env NODE_ENV=production node index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/guojian0610/tongzhou#readme",
   "dependencies": {
+    "cross-env": "^5.0.1",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "react": "^15.6.0",
