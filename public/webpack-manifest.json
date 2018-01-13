@@ -1,9 +1,9 @@
 {
-  "app.js": "js/app.5961138f.js",
-  "app.js.map": "js/app.5961138f.js.map",
-  "manifest.js": "js/manifest.d41d8cd9.js",
-  "manifest.js.map": "js/manifest.d41d8cd9.js.map",
+  "app.js": "js/prod/app.5961138f.js",
+  "app.js.map": "js/prod/app.5961138f.js.map",
+  "manifest.js": "js/prod/manifest.d41d8cd9.js",
+  "manifest.js.map": "js/prod/manifest.d41d8cd9.js.map",
   "manifest.json": "chunk-manifest.json",
-  "vendor.js": "js/vendor.a3b86cff.js",
-  "vendor.js.map": "js/vendor.a3b86cff.js.map"
+  "vendor.js": "js/prod/vendor.a3b86cff.js",
+  "vendor.js.map": "js/prod/vendor.a3b86cff.js.map"
 }

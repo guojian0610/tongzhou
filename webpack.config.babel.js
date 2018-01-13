@@ -73,7 +73,7 @@ const config = {
             }),
     new CommonsChunkPlugin({
         names: ['vendor','manifest'], 
-        filename: 'js/[name].[chunkhash:8].js',
+        filename: ENV === 'development'? 'js/debug/[name]-debug.js' : 'js/prod/[name].[chunkhash:8].js',
         minChunks: Infinity//库文件不会被我们自己写的模块引用，所以永远不会被打包进来
     }),
     new ManifestPlugin({

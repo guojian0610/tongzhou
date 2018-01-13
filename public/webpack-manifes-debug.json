@@ -1,6 +1,6 @@
 {
   "app.js": "js/debug/app-debug.js",
-  "manifest.js": "js/manifest.d41d8cd9.js",
+  "manifest.js": "js/debug/manifest-debug.js",
   "manifest.json": "chunk-manifest-debug.json",
-  "vendor.js": "js/vendor.a2f131d8.js"
+  "vendor.js": "js/debug/vendor-debug.js"
 }
