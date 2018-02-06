@@ -74,7 +74,7 @@ const config = {
     new CommonsChunkPlugin({
         names: ['vendor','manifest'], 
         filename: 'js/[name].[chunkhash].js',
-        minChunks: Infinity//库文件不会被我们自己写的模块引用，所以永远不会被打包进来
+        minChunks: Infinity//库文件不会引用我们自己写的模块引用，所以我们自己写的模块永远不会被打包进来
     }),
     new ManifestPlugin({
       fileName: ENV === 'development' ? 'webpack-manifes-debug.json' : 'webpack-manifest.json'
