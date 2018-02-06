@@ -23,7 +23,7 @@ const entry = {
 const output = {
   path: path.join(__dirname, 'public'),
   pathinfo: ENV === 'development' ? true : false,//告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项默认值是 false，并且不应该用于生产环境(production)，但是对阅读开发环境(development)中的生成代码(generated code)极其有用。
-  filename: ENV === 'development' ? "js/debug/[name]-debug.js" : 'js/[name].[chunkhash].js',//取8位的hash，默认是16位
+  filename: ENV === 'development' ? "js/debug/[name]-debug.js" : 'js/prod/[name].[chunkhash:8].js',//取8位的hash，默认是16位
 }
 const rules = [
   {
@@ -73,7 +73,7 @@ const config = {
             }),
     new CommonsChunkPlugin({
         names: ['vendor','manifest'], 
-        filename: 'js/[name].[chunkhash].js',
+        filename: ENV === 'development'? 'js/debug/[name]-debug.js' : 'js/prod/[name].[chunkhash:8].js',
         minChunks: Infinity//库文件不会引用我们自己写的模块引用，所以我们自己写的模块永远不会被打包进来
     }),
     new ManifestPlugin({
@@ -87,7 +87,7 @@ const config = {
       inlineManifest: false
     }),//它会将 manifest 提取到一个单独的 JSON 文件中
     new CleanWebpackPlugin(
-      ENV === 'development' ? ['public/js/debug','public/webpack-manifest-debug.js','public/chunk-manifest-debug.json']:['public/js','public/webpack-manifest.js','public/chunk-manifest.json'],　 //匹配删除的文件
+      ENV === 'development' ? ['public/js/debug','public/webpack-manifest-debug.js','public/chunk-manifest-debug.json']:['public/js/prod','public/webpack-manifest.js','public/chunk-manifest.json'],　 //匹配删除的文件
       {
         root: __dirname,       　　　　　　　　　　//根目录
         verbose:  true,        　　　　　　　　　　//开启在控制台输出信息
@@ -129,7 +129,7 @@ if (ENV === 'development') {
   }))
 
   config.plugins.push(new ExtractTextPlugin({
-      filename: 'public/css/[name].[chunkhash].css',
+      filename: 'public/css/[name].[chunkhash:8].css',
       allChunks: true
   }))
 

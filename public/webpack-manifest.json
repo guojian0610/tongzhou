@@ -1,8 +1,9 @@
 {
-  "app.js": "js/app.5961138f1c7f74ba4f2b.js",
-  "app.js.map": "js/app.5961138f1c7f74ba4f2b.js.map",
-  "manifest.js": "js/manifest.d41d8cd98f00b204e980.js",
-  "manifest.js.map": "js/manifest.d41d8cd98f00b204e980.js.map",
-  "vendor.js": "js/vendor.c6ded3a551adc9546fd7.js",
-  "vendor.js.map": "js/vendor.c6ded3a551adc9546fd7.js.map"
+  "app.js": "js/prod/app.5961138f.js",
+  "app.js.map": "js/prod/app.5961138f.js.map",
+  "manifest.js": "js/prod/manifest.d41d8cd9.js",
+  "manifest.js.map": "js/prod/manifest.d41d8cd9.js.map",
+  "manifest.json": "chunk-manifest.json",
+  "vendor.js": "js/prod/vendor.a3b86cff.js",
+  "vendor.js.map": "js/prod/vendor.a3b86cff.js.map"
 }
